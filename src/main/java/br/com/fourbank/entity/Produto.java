@@ -1,4 +1,4 @@
-package br.com.fourbank;
+package br.com.fourbank.entity;
 
 public class Produto {
 

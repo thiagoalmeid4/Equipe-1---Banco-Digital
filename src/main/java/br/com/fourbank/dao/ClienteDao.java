@@ -1,6 +1,7 @@
 package br.com.fourbank.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.fourbank.entity.Cliente;
 
@@ -10,13 +11,21 @@ public class ClienteDao {
 	public void addCliente(Cliente cliente) {
 		listadeclientes.add(cliente);
 	}
-	 public void listarclentes() {
-		 for (Cliente cliente: listadeclientes) {
-			 System.out.println("Nome: "+cliente.getNome()+"\nCPF: "+cliente.getCpf()+
-					 "\nId: "+cliente.getId()+"\nData de nascimento"+cliente.getDataDeNascimento()+
-					 "\nSenha:"+cliente.getSenha()+"\nSaldo"+cliente.getSaldo());
-		 }
+	public void removerCliente(int i) {
+		listadeclientes.remove(i);
+	}
+	 public List<Cliente> listarclientes() {
+		 return listadeclientes;
 	 }
+	public Cliente getNomeCliente(String nome) {
+		for (int i =0 ; i< listadeclientes.size();i++) {
+			Cliente cliente = listadeclientes.get(i);
+			if(nome.equalsIgnoreCase(listadeclientes.get(i).getNome())) {
+				return cliente;
+			}
+		}
+		return null;
+	}
 	
 
 }

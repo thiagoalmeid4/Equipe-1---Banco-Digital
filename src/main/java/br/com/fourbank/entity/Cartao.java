@@ -2,14 +2,14 @@ package br.com.fourbank.entity;
 
 public class Cartao {
 
-	private Integer nCartao;
+	private int nCartao;
 	private String tipoCartao;
 	private String dataValidade;
-	private Integer codigoSeguranca;
+	private int codigoSeguranca;
 	
 	public Cartao() {}
 	
-	public Cartao(Integer nCartao, String tipoCartao, String dataValidade, Integer codigoSeguranca) {
+	public Cartao(int nCartao, String tipoCartao, String dataValidade, int codigoSeguranca) {
 		super();
 		this.nCartao = nCartao;
 		this.tipoCartao = tipoCartao;
@@ -17,10 +17,10 @@ public class Cartao {
 		this.codigoSeguranca = codigoSeguranca;
 	}
 	
-	public Integer getnCartao() {
+	public int getnCartao() {
 		return nCartao;
 	}
-	public void setnCartao(Integer nCartao) {
+	public void setnCartao(int nCartao) {
 		this.nCartao = nCartao;
 	}
 	public String getTipoCartao() {
@@ -35,10 +35,10 @@ public class Cartao {
 	public void setDataValidade(String dataValidade) {
 		this.dataValidade = dataValidade;
 	}
-	public Integer getCodigoSeguranca() {
+	public int getCodigoSeguranca() {
 		return codigoSeguranca;
 	}
-	public void setCodigoSeguranca(Integer codigoSeguranca) {
+	public void setCodigoSeguranca(int codigoSeguranca) {
 		this.codigoSeguranca = codigoSeguranca;
 	}
 	

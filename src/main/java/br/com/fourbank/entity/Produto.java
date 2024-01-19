@@ -3,16 +3,16 @@ package br.com.fourbank.entity;
 public class Produto {
 
 	private String nome;
-	private Double preco;
+	private double preco;
 	private String codigo;
 	private String descricao;
-	private Integer quantidade;
+	private int quantidade;
 	private String categoria;
 	private String marca;
 	
 	public Produto() {}
 	
-	public Produto(String nome, Double preco, String codigo, String descricao, Integer quantidade, String categoria,
+	public Produto(String nome, double preco, String codigo, String descricao, int quantidade, String categoria,
 			String marca) {
 		super();
 		this.nome = nome;
@@ -29,10 +29,10 @@ public class Produto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Double getPreco() {
+	public double getPreco() {
 		return preco;
 	}
-	public void setPreco(Double preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 	public String getCodigo() {
@@ -47,10 +47,10 @@ public class Produto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Integer getQuantidade() {
+	public int getQuantidade() {
 		return quantidade;
 	}
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
 	public String getCategoria() {

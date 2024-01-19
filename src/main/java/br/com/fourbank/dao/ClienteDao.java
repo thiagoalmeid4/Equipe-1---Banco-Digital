@@ -13,8 +13,8 @@ public class ClienteDao {
 	 public void listarclentes() {
 		 for (Cliente cliente: listadeclientes) {
 			 System.out.println("Nome: "+cliente.getNome()+"\nCPF: "+cliente.getCpf()+
-					 "\nId: "+cliente.getId().toString()+"\nData de nascimento"+cliente.getDataDeNascimento()+
-					 "\nSenha:"+cliente.getSenha()+"\nSaldo"+cliente.getSaldo().toString());
+					 "\nId: "+cliente.getId()+"\nData de nascimento"+cliente.getDataDeNascimento()+
+					 "\nSenha:"+cliente.getSenha()+"\nSaldo"+cliente.getSaldo());
 		 }
 	 }
 	

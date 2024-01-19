@@ -2,34 +2,34 @@ package br.com.fourbank.entity;
 
 public class Pagamento {
 	
-	private Double desconto;
-	private Double valorTotal;
-	private Boolean status;
+	private double desconto;
+	private double valorTotal;
+	private boolean status;
 	
 	public Pagamento() {}
 	
-	public Pagamento(Double desconto, Double valorTotal, Boolean status) {
+	public Pagamento(double desconto, double valorTotal, boolean status) {
 		super();
 		this.desconto = desconto;
 		this.valorTotal = valorTotal;
 		this.status = status;
 	}
-	public Double getDesconto() {
+	public double getDesconto() {
 		return desconto;
 	}
-	public void setDesconto(Double desconto) {
+	public void setDesconto(double desconto) {
 		this.desconto = desconto;
 	}
-	public Double getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(Double valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	public Boolean getStatus() {
+	public boolean  getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

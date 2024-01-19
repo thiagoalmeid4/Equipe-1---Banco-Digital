@@ -2,15 +2,15 @@ package br.com.fourbank.entity;
 
 public class Pedido {
 
-	private Integer id;
-	private Double frete;
-	private Double valorTotal;
+	private int id;
+	private double frete;
+	private double valorTotal;
 	private String dataDoPedido;
-	private Boolean status;
+	private boolean status;
 	
 	public Pedido() {}
 	
-	public Pedido(Integer id, Double frete, Double valorTotal, String dataDoPedido, Boolean status) {
+	public Pedido(int id, double frete, double valorTotal, String dataDoPedido, boolean status) {
 		super();
 		this.id = id;
 		this.frete = frete;
@@ -18,22 +18,22 @@ public class Pedido {
 		this.dataDoPedido = dataDoPedido;
 		this.status = status;
 	}
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public Double getFrete() {
+	public double getFrete() {
 		return frete;
 	}
-	public void setFrete(Double frete) {
+	public void setFrete(double frete) {
 		this.frete = frete;
 	}
-	public Double getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(Double valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	public String getDataDoPedido() {
@@ -42,10 +42,10 @@ public class Pedido {
 	public void setDataDoPedido(String dataDoPedido) {
 		this.dataDoPedido = dataDoPedido;
 	}
-	public Boolean getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 	

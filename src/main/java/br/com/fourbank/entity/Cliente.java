@@ -2,16 +2,16 @@ package br.com.fourbank.entity;
 
 public class Cliente {
 
-	private Integer id;
+	private int id;
 	private String nome;
-	private Double saldo;
+	private double saldo;
 	private String cpf;
 	private String senha;
 	private String dataDeNascimento;
 	
 	public Cliente() {}
 	
-	public Cliente(Integer id, String nome, Double saldo, String cpf, String senha, String dataDeNascimento) {
+	public Cliente(int id, String nome, double saldo, String cpf, String senha, String dataDeNascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -21,10 +21,10 @@ public class Cliente {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -33,10 +33,10 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Double getSaldo() {
+	public double getSaldo() {
 		return saldo;
 	}
-	public void setSaldo(Double saldo) {
+	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 	public String getCpf() {

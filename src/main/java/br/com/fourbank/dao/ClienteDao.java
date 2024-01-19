@@ -11,9 +11,6 @@ public class ClienteDao {
 	public void addCliente(Cliente cliente) {
 		listadeclientes.add(cliente);
 	}
-	public void removerCliente(int i) {
-		listadeclientes.remove(i);
-	}
 	 public List<Cliente> listarclientes() {
 		 return listadeclientes;
 	 }

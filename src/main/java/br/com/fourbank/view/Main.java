@@ -5,7 +5,9 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 import br.com.fourbank.entity.Cliente;
+import br.com.fourbank.entity.Produto;
 import br.com.fourbank.service.ClienteService;
+import br.com.fourbank.service.ProdutoService;
 
 public class Main {
 
@@ -41,7 +43,7 @@ public class Main {
 				break;
 
 			case 2:
-
+				
 				break;
 
 			case 3:

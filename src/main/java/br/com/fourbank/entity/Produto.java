@@ -2,13 +2,13 @@ package br.com.fourbank.entity;
 
 public class Produto {
 
-	private String nome;
-	private double preco;
-	private String codigo;
+	private String nome;//
+	private double preco;//
+	private String codigo;//
 	private String descricao;
-	private int quantidade;
+	private int quantidade;//
 	private String categoria;
-	private String marca;
+	private String marca;//
 	
 	public Produto() {}
 	

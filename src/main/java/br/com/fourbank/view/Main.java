@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 import br.com.fourbank.entity.Cliente;
+import br.com.fourbank.entity.Produto;
 import br.com.fourbank.service.ClienteService;
+<<<<<<< HEAD
 =======
 import br.com.fourbank.service.PedidoService;
 import br.com.fourbank.entity.Pedido;
@@ -17,6 +19,9 @@ import java.util.List;
 
 import br.com.fourbank.entity.Cliente;
 >>>>>>> origin/feat2
+=======
+import br.com.fourbank.service.ProdutoService;
+>>>>>>> origin/feat3
 
 public class Main {
 
@@ -52,7 +57,7 @@ public class Main {
 				break;
 
 			case 2:
-
+				
 				break;
 
 			case 3:

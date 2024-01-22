@@ -12,11 +12,13 @@ public class Pedido {
 		this.produtos = produtos;
 	}
 
+	private Cliente cliente;
 	private Integer id;
 	private Double frete;
 	private Double valorTotal;
 	private String dataDoPedido;
 	private boolean status;
+
 	
 	public Pedido() {}
 	

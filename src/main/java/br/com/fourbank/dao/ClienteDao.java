@@ -23,6 +23,15 @@ public class ClienteDao {
 		}
 		return null;
 	}
+	public Cliente getCliente(int id) {
+		return listadeclientes.get(id);
+	}
+	public void depositar(int id, double valor) {
+		Cliente cliente = getCliente(id);
+		if(cliente!=null) {
+			cliente.setSaldo(cliente.getSaldo()+valor);
+		}
+	}
 	
 
 }

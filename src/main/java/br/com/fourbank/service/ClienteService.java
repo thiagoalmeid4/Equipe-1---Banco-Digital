@@ -27,4 +27,13 @@ public class ClienteService {
 		} else
 			return null;
 	}
+	public double mostrarSaldo(int id) {
+		return clienteDao.getCliente(id).getSaldo();
+	}
+	public Cliente buscarId(int id) {
+		return clienteDao.getCliente(id);
+	}
+	public void depositar(int id , double valor) {
+		clienteDao.depositar(id,valor);
+	}
 }

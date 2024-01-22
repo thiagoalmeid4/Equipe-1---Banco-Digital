@@ -1,19 +1,29 @@
 package br.com.fourbank.entity;
 
-public class Pedido {
+import java.util.List;
 
+public class Pedido {
+	private List<Produto> produtos;
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	private Cliente cliente;
 	private Integer id;
-	private Double frete;
 	private Double valorTotal;
 	private String dataDoPedido;
 	private Boolean status;
 	
 	public Pedido() {}
 	
-	public Pedido(Integer id, Double frete, Double valorTotal, String dataDoPedido, Boolean status) {
+	public Pedido(Integer id, Double valorTotal, String dataDoPedido, Boolean status) {
 		super();
 		this.id = id;
-		this.frete = frete;
+		
 		this.valorTotal = valorTotal;
 		this.dataDoPedido = dataDoPedido;
 		this.status = status;
@@ -23,12 +33,6 @@ public class Pedido {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Double getFrete() {
-		return frete;
-	}
-	public void setFrete(Double frete) {
-		this.frete = frete;
 	}
 	public Double getValorTotal() {
 		return valorTotal;
@@ -47,6 +51,14 @@ public class Pedido {
 	}
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

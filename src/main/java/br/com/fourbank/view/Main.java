@@ -21,27 +21,7 @@ import br.com.fourbank.entity.Cliente;
 public class Main {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
 		Scanner input = new Scanner(System.in);
-=======
-		Produto p1 = new Produto();
-		Produto p2 = new Produto();
-		Pedido pedido = new Pedido();
-		Cliente cliente = new Cliente();
-		PedidoService pedidoService = new PedidoService();
-		cliente.setSaldo(50d);
-		p1.setPreco(10d);
-		p2.setPreco(15d);
-		List<Produto> produtos = new ArrayList<>();
-		produtos.add(p1);
-		produtos.add(p2);
-		pedido.setCliente(cliente);
-		pedido.setProdutos(produtos);
-		pedidoService.realizarVenda(pedido);
-		System.out.println(cliente.getSaldo());
-		System.out.println(pedido.getValorTotal());
-				
->>>>>>> origin/feat2
 
 		ClienteService clienteService = new ClienteService();
 		Cliente cliente = new Cliente();

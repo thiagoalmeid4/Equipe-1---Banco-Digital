@@ -1,17 +1,24 @@
 package br.com.fourbank.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fourbank.dao.ClienteDao;
 import br.com.fourbank.dao.PedidoDao;
+import br.com.fourbank.entity.Cliente;
 import br.com.fourbank.entity.Pedido;
 import br.com.fourbank.entity.Produto;
 
 public class PedidoService {
+	
 	PedidoDao pedidoDao = new PedidoDao();
+	ClienteDao vendasCliente = new ClienteDao();
 
-	public void adicionarPedido(Pedido pedido) {
-		pedidoDao.addPedido(pedido);
+
+	public List<Pedido> listarPedidosPorCliente(String cpf){
+		return pedidoDao.pedidoPorCliente(cpf);
 	}
+
 
 	public List<Pedido> listarPedidos() {
 		return pedidoDao.listarPedidos();
@@ -24,9 +31,11 @@ public class PedidoService {
 		}
 		pedido.setValorTotal(valorTotal);
 		if (pedido.getCliente().getSaldo() >= pedido.getValorTotal())
+			
 
 		{
 			pedido.getCliente().setSaldo(pedido.getCliente().getSaldo() - pedido.getValorTotal());
+			pedidoDao.addPedido(pedido);
 			return true;
 		}
 

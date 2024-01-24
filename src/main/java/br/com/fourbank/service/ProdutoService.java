@@ -17,8 +17,9 @@ public class ProdutoService {
 			return "informações insuficientes\n";
 		}
 	}
-
+  
 	public List<Produto> listar(){
 		return produtoDao.listar();
 	}
+
 }

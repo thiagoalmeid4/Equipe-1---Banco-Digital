@@ -1,5 +1,7 @@
 package br.com.fourbank.service;
 
+import java.util.List;
+
 import br.com.fourbank.dao.ProdutoDao;
 import br.com.fourbank.entity.Produto;
 
@@ -16,4 +18,7 @@ public class ProdutoService {
 		}
 	}
 
+	public List<Produto> listar(){
+		return produtoDao.listar();
+	}
 }

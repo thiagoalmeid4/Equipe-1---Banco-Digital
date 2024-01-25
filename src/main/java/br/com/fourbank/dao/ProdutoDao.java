@@ -9,10 +9,8 @@ public class ProdutoDao {
 
 	ArrayList<Produto> produtos = new ArrayList<>();
 	
-	public String cadastrar(Produto a) {
+	public void cadastrar(Produto a) {
 		produtos.add(a);
-		
-		return "produto "+a.getNome()+" adicionado";
 	}
 	
 	public List<Produto> listar(){

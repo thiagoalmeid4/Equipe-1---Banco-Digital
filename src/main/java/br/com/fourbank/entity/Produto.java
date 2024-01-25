@@ -47,7 +47,7 @@ public class Produto {
 		if(codigo.matches(regex))
 		this.codigo = codigo;
 		else
-			throw new RuntimeException("O código precisa ter 8 números ou esse código já está em uso");
+			throw new RuntimeException("O código precisa ter 8 números");
 	}
 	public String getDescricao() {
 		return descricao;

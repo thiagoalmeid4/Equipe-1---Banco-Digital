@@ -21,5 +21,18 @@ public class ProdutoService {
 	public List<Produto> listar(){
 		return produtoDao.listar();
 	}
+ 
+
+	public Produto produtoPorCodigo(String codigo) {
+		for (Produto p : produtoDao.listar()) {
+			if(p.getCodigo().equals(codigo)) {
+				return p;
+			}
+		
+		}	
+		return null;
+	}
+
+
 
 }

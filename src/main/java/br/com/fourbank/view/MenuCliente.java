@@ -1,9 +1,13 @@
 package br.com.fourbank.view;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.fourbank.dao.ProdutoDao;
 import br.com.fourbank.entity.Cliente;
+import br.com.fourbank.entity.Pedido;
 import br.com.fourbank.entity.Produto;
 import br.com.fourbank.service.ClienteService;
 import br.com.fourbank.service.PedidoService;
@@ -14,6 +18,9 @@ public class MenuCliente {
 	private ClienteService clienteService;
 	private PedidoService pedidoService;
 	private ProdutoService produtoService;
+	private Produto produto;
+	private ProdutoDao dao;
+	private Cliente clienteLogado;
 
 	Scanner input = new Scanner(System.in);
 
@@ -21,9 +28,12 @@ public class MenuCliente {
 		this.clienteService = new ClienteService();
 		this.pedidoService = new PedidoService();
 		this.produtoService = new ProdutoService();
+		this.produto = new Produto();
+		this.dao = new ProdutoDao();
+		
 	}
 
-	public void menuPrincipal() {
+	private void menuPrincipal() {
 		Scanner input = new Scanner(System.in);
 		var cliente = new Cliente();
 
@@ -47,7 +57,7 @@ public class MenuCliente {
 				break;
 			case 2:
 				login();
-				main(cliente);
+				main();
 				break;
 			case 3:
 				flag = false;
@@ -56,16 +66,16 @@ public class MenuCliente {
 		}
 	}
 
-	public void login() {
+	private void login() {
 		String nome;
 		System.out.println("Insira nome");
 		nome = input.nextLine();
 		System.out.println("Insira senha:");
 		String senha = input.nextLine();
 
-		Cliente cliente = clienteService.getNomeCliente(nome, senha);
-		if (cliente != null) {
-			main(cliente);
+		clienteLogado = clienteService.getNomeCliente(nome, senha);
+		if (clienteLogado != null) {
+			main();
 		} else {
 			System.out.println("Usuario ou senha invalidos");
 		}
@@ -77,8 +87,9 @@ public class MenuCliente {
 		}
 	}
 
-	public void main(Cliente cliente) {
+	private void main() {
 		Scanner input = new Scanner(System.in);
+		
 		boolean flag = true;
 		System.out.println("Agora você está no seu menu:");
 		while (flag) {
@@ -88,13 +99,13 @@ public class MenuCliente {
 			int escolha = input.nextInt();
 			switch (escolha) {
 			case 1:
-				System.out.println("Saldo: " + clienteService.mostrarSaldo(cliente.getId()));
+				System.out.println("Saldo: " + clienteService.mostrarSaldo(clienteLogado.getId()));
 				break;
 			case 2:
 				System.out.println("Qual valor para o deposito:");
 				var deposito = input.nextDouble();
 				if (deposito > 0) {
-					clienteService.depositar(cliente.getId(), deposito);
+					clienteService.depositar(clienteLogado.getId(), deposito);
 					System.out.println("Valor de R$" + deposito + " foi adicionado com sucesso");
 				} else {
 					System.out.println("Valor inválido");
@@ -106,6 +117,13 @@ public class MenuCliente {
 			case 4:
 				break;
 			case 5:
+				
+				List<Produto> lista = new ArrayList<>();
+				Pedido pedido = new Pedido();
+				pedido.setCliente(clienteLogado);
+				pedido.setProdutos(comprarProduto());
+				pedidoService.realizarVenda(pedido);
+				
 				break;
 			case 6:
 				flag = false;
@@ -115,10 +133,9 @@ public class MenuCliente {
 
 	}
 
-	private static void menuVendedor() {
+	private void menuVendedor() {
 		Scanner input = new Scanner(System.in);
-		Produto produto = new Produto();
-		ProdutoDao dao = new ProdutoDao();
+		
 		int numero;
 		System.out.println(" 1-Cadastre seu produto\n" + " 2-listar seus produtos\n");
 		numero = input.nextInt();
@@ -158,5 +175,32 @@ public class MenuCliente {
 			break;
 		}
 
+	}
+	
+	private List<Produto> comprarProduto() {
+		boolean condicao = true;
+		int sensor;
+		Scanner input = new Scanner(System.in);
+		List<Produto> lista = new ArrayList<>();
+		
+		while(condicao) {
+			System.out.println("insira 1 se deseja adicionar um produto\n");
+			sensor = input.nextInt();
+			
+			switch(sensor) {
+			case 1:
+				
+				System.out.println("Informe o código do produto que produto deseja comprar");
+				String cod = input.next();
+				produto = produtoService.produtoPorCodigo(cod);
+				lista.add(produto);
+				
+				break;
+			default:
+				condicao = false;
+				break;
+			}
+		}
+		return lista;
 	}
 }

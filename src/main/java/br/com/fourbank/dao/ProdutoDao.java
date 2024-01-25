@@ -12,8 +12,18 @@ public class ProdutoDao {
 	public void cadastrar(Produto a) {
 		produtos.add(a);
 	}
-	
-	public List<Produto> listar(){
+
+	public List<Produto> listar() {
 		return produtos;
 	}
+
+	public void removerQtd(Produto produto) {
+		for (Produto p : produtos) {
+			if (p.getCodigo().equals(produto.getCodigo())) {
+				produto.setQuantidade(produto.getQuantidade() - 1);
+			}
+
+		}
+	}
+  
 }

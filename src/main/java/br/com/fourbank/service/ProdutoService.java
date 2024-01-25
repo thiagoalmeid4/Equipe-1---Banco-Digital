@@ -9,13 +9,11 @@ public class ProdutoService {
 	
 	ProdutoDao produtoDao = new ProdutoDao();
 	
-	public String cadastrar(Produto a) {
-		if((a.getNome() != null)&&(a.getCodigo() != null)&&
-				(a.getMarca() != null)) {
-			return produtoDao.cadastrar(a)+"\n";
-		}else {
-			return "informações insuficientes\n";
+	public void cadastrar(Produto a) {
+		if(a.getCodigo().length()== 8){
+			produtoDao.cadastrar(a);
 		}
+		
 	}
   
 	public List<Produto> listar(){

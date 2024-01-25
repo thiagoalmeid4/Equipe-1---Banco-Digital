@@ -10,8 +10,6 @@ public class ClienteService {
 	ClienteDao clienteDao = new ClienteDao();
 
 	public void addCliente(Cliente cliente) {
-		String cpfFormatado = cliente.getCpf().replace("-", "").replace(".", "");
-		cliente.setCpf(cpfFormatado.strip());
 		if (cliente.getCpf().length() == 11)
 			clienteDao.addCliente(cliente);
 	}
@@ -27,13 +25,16 @@ public class ClienteService {
 		} else
 			return null;
 	}
+
 	public double mostrarSaldo(int id) {
 		return clienteDao.getCliente(id).getSaldo();
 	}
+
 	public Cliente buscarId(int id) {
 		return clienteDao.getCliente(id);
 	}
-	public void depositar(int id , double valor) {
-		clienteDao.depositar(id,valor);
+
+	public void depositar(int id, double valor) {
+		clienteDao.depositar(id, valor);
 	}
 }

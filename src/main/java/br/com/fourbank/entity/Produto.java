@@ -27,6 +27,10 @@ public class Produto {
 		return nome;
 	}
 	public void setNome(String nome) {
+		if(nome == null || nome.isBlank()) {
+			throw new RuntimeException("O nome é obrigatório");
+		}
+		else
 		this.nome = nome;
 	}
 	public double getPreco() {
@@ -39,7 +43,11 @@ public class Produto {
 		return codigo;
 	}
 	public void setCodigo(String codigo) {
+		String regex = "^[0-9]{8}$";
+		if(codigo.matches(regex))
 		this.codigo = codigo;
+		else
+			throw new RuntimeException("O código precisa ter 8 números ou esse código já está em uso");
 	}
 	public String getDescricao() {
 		return descricao;
@@ -63,6 +71,10 @@ public class Produto {
 		return marca;
 	}
 	public void setMarca(String marca) {
+		if(marca == null || marca.isBlank()) {
+			throw new RuntimeException("Marca é obrigatória");
+		}
+		else
 		this.marca = marca;
 	}
 	

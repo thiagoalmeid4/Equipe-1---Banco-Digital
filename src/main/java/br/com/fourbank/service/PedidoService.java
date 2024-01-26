@@ -1,20 +1,22 @@
 package br.com.fourbank.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fourbank.dao.ClienteDao;
+import br.com.fourbank.dao.BancoDeDados;
 import br.com.fourbank.dao.PedidoDao;
 import br.com.fourbank.dao.ProdutoDao;
-import br.com.fourbank.entity.Cliente;
 import br.com.fourbank.entity.Pedido;
 import br.com.fourbank.entity.Produto;
 
 public class PedidoService {
 	
-	PedidoDao pedidoDao = new PedidoDao();
-	ClienteDao vendasCliente = new ClienteDao();
-	ProdutoDao produtoDao = new ProdutoDao();
+	private PedidoDao pedidoDao;
+	private ProdutoDao produtoDao;
+
+	public PedidoService (BancoDeDados bancoDeDados) {
+		this.pedidoDao = new PedidoDao(bancoDeDados.getPedidos());
+		this.produtoDao = new ProdutoDao(bancoDeDados.getProdutos());
+	}
 
 	public List<Pedido> listarPedidosPorCliente(String cpf){
 		return pedidoDao.pedidoPorCliente(cpf);

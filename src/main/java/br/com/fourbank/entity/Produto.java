@@ -9,6 +9,7 @@ public class Produto {
 	private int quantidade;//
 	private String categoria;
 	private String marca;//
+	private int idVendedor;
 	
 	public Produto() {}
 	
@@ -22,7 +23,16 @@ public class Produto {
 		this.quantidade = quantidade;
 		this.categoria = categoria;
 		this.marca = marca;
+		this.idVendedor = idVendedor;
 	}
+	public int getIdVendedor() {
+		return idVendedor;
+	}
+
+	public void setIdVendedor(int idVendedor) {
+		this.idVendedor = idVendedor;
+	}
+
 	public String getNome() {
 		return nome;
 	}

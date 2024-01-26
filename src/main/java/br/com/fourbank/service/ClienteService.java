@@ -15,8 +15,14 @@ public class ClienteService {
 	}
 
 	public void addCliente(Cliente cliente) {
+		Cliente c = clienteDao.getCpfCliente(cliente.getCpf());
+		if(c == null) {
 		if (cliente.getCpf().length() == 11)
 			clienteDao.addCliente(cliente);
+		}
+		else {
+			throw new RuntimeException("Esse Cpf já está cadastrado");
+		}
 	}
 
 	public List<Cliente> listarCliente() {
@@ -24,11 +30,17 @@ public class ClienteService {
 	}
 
 	public Cliente getNomeCliente(String nome, String senha) {
+
 		Cliente cliente = clienteDao.getNomeCliente(nome);
-		if (senha.equalsIgnoreCase(cliente.getSenha())) {
-			return cliente;
-		} else
-			return null;
+		if (cliente != null) {
+			if (senha.equalsIgnoreCase(cliente.getSenha())) {
+				return cliente;
+			} else {
+				throw new RuntimeException("Senha inválida");
+			}
+		}else {
+			throw new RuntimeException("Usuário inexistente");
+		}
 	}
 
 	public double mostrarSaldo(int id) {

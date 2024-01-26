@@ -13,6 +13,7 @@ public class ClienteDao {
 	}
 
 	public void addCliente(Cliente cliente) {
+		cliente.setId(listadeclientes.size());
 		listadeclientes.add(cliente);
 	}
 	 public List<Cliente> listarclientes() {
@@ -37,5 +38,14 @@ public class ClienteDao {
 		}
 	}
 	
+	public Cliente getCpfCliente(String cpf) {
+		for (int i = 0 ;i<listadeclientes.size();i++) {
+			Cliente cliente = listadeclientes.get(i);
+			if(cpf.equalsIgnoreCase(listadeclientes.get(i).getCpf())){
+				return cliente;
+			}
+		}
+		return null;
+	}
 
 }

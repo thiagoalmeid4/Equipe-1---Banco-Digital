@@ -1,5 +1,7 @@
 package br.com.fourbank.view;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +11,7 @@ import br.com.fourbank.dao.ProdutoDao;
 import br.com.fourbank.entity.Cliente;
 import br.com.fourbank.entity.Pedido;
 import br.com.fourbank.entity.Produto;
+import br.com.fourbank.entity.Venda;
 import br.com.fourbank.service.ClienteService;
 import br.com.fourbank.service.PedidoService;
 import br.com.fourbank.service.ProdutoService;
@@ -37,12 +40,12 @@ public class MenuCliente {
 		var cliente = new Cliente();
 
 		System.out.println("Bem vindo a nossa loja:");
-		
-			System.out.println(" 1-Cadastrar\n" + " 2-Acessar conta");
-			int escolha = input.nextInt();
-			switch (escolha) {
-			case 1:
-				try {
+
+		System.out.println(" 1-Cadastrar\n" + " 2-Acessar conta");
+		int escolha = input.nextInt();
+		switch (escolha) {
+		case 1:
+			try {
 				System.out.println("Insira seu nome:");
 				input = new Scanner(System.in);
 				cliente.setNome(input.nextLine());
@@ -53,18 +56,18 @@ public class MenuCliente {
 				System.out.println("Insira sua Data de nascimento:");
 				cliente.setDataDeNascimento(input.nextLine());
 				clienteService.addCliente(cliente);
-				}catch(RuntimeException e) {
-					System.out.println(e.getMessage());
-					menuPrincipal();
-				}
-				break;
-			case 2:
-				login();
-				main();
-				break;
-			
+			} catch (RuntimeException e) {
+				System.out.println(e.getMessage());
+				menuPrincipal();
 			}
-		
+			break;
+		case 2:
+			login();
+			main();
+			break;
+
+		}
+
 	}
 
 	private void login() {
@@ -97,8 +100,8 @@ public class MenuCliente {
 		System.out.println("Agora você está no seu menu:");
 		while (flag) {
 			System.out.println("Bem vindo\n" + "--------------------------------\n" + " 1-Mostrar saldo\n"
-					+ " 2-Depositar\n" + " 3-Acessar como vendedor\n" + " 4-Listar pedidos\n" +"5-Listar pedidos do vendedor\n"+ " 6-Comprar produtos\n"
-					+ " 7-Sair da conta");
+					+ " 2-Depositar\n" + " 3-Acessar como vendedor\n" + " 4-Listar pedidos\n" + " 5-Comprar produtos\n"
+					+ " 6-Sair da conta");
 			int escolha = input.nextInt();
 			switch (escolha) {
 			case 1:
@@ -118,21 +121,23 @@ public class MenuCliente {
 				menuVendedor();
 				break;
 			case 4:
-				pedidoService.listarPedidos();
+				for (Pedido p : pedidoService.listarPedidosPorCliente(clienteLogado.getCpf())) {
+					System.out.println("\nId: " + p.getId() + "\nData: " + p.getDataDoPedido() + "\nValor total: "
+							+ p.getValorTotal() + "\nCódigo: ");
+					for (Produto pr : p.getProdutos()) {
+						System.out.println("\nProduto: " + pr.getNome() + "\nCódigo: " + pr.getCodigo() + "\nPreço: "
+								+ pr.getPreco());
+					}
+				}
+
 				break;
+
 			case 5:
-				
+
+				comprarProduto();
+
 				break;
 			case 6:
-
-				List<Produto> lista = new ArrayList<>();
-				Pedido pedido = new Pedido();
-				pedido.setCliente(clienteLogado);
-				pedido.setProdutos(comprarProduto());
-				pedidoService.realizarVenda(pedido);
-
-				break;
-			case 7:
 				menuPrincipal();
 				break;
 			}
@@ -144,7 +149,7 @@ public class MenuCliente {
 		Scanner input = new Scanner(System.in);
 
 		int numero;
-		System.out.println(" 1-Cadastre seu produto\n" + " 2-listar seus produtos\n");
+		System.out.println(" 1-Cadastre seu produto\n" + " 2-listar vendas\n" + " 3-sair");
 		numero = input.nextInt();
 
 		switch (numero) {
@@ -173,19 +178,26 @@ public class MenuCliente {
 			produto.setQuantidade(input.nextInt());
 
 			produtoService.cadastrar(produto);
+
 			break;
+
 		case 2:
-			for (Produto p : produtoService.listar()) {
-				System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
-						+ p.getCategoria() + "\nCódigo: " + p.getCodigo() + "\nPreço: " + p.getPreco()
-						+ "\nQuantidade em estoque: " + p.getQuantidade() );
+			for (Venda v : pedidoService.listarVendas(clienteLogado.getId())) {
+				System.out.println("\nId: " + v.getIdPedido() + "\nCódigo: " + v.getCodigoProduto() + "\nProduto: "
+						+ v.getNomeProduto() + "\nPreço: " + v.getPreco());
 			}
+			break;
+		case 3:
+			main();
+			break;
+		default:
+			menuVendedor();
 			break;
 		}
 
 	}
 
-	private List<Produto> comprarProduto() {
+	private void comprarProduto() {
 		boolean condicao = true;
 		int sensor;
 		Scanner input = new Scanner(System.in);
@@ -198,7 +210,7 @@ public class MenuCliente {
 		}
 
 		while (condicao) {
-			System.out.println("insira 1 se deseja adicionar um produto\n");
+			System.out.println("insira 1 se deseja adicionar um produto ou 0 para sair\n");
 			sensor = input.nextInt();
 
 			switch (sensor) {
@@ -206,16 +218,34 @@ public class MenuCliente {
 
 				System.out.println("Informe o código do produto que produto deseja comprar");
 				String cod = input.next();
+				
 				produto = produtoService.produtoPorCodigo(cod);
 				lista.add(produto);
 
 				break;
+			case 2: 
+				if (lista.size() > 0) {
+				
+					pedidoService.realizarVenda(new Pedido(clienteLogado, obterData(), lista));
+				
+			}
+				break;
 			default:
+
 				condicao = false;
 				break;
 			}
 		}
-		return lista;
+		
 	}
 
+	private String obterData() {
+		LocalDateTime dataHoraAtual = LocalDateTime.now();
+
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+		String dataFormatada = dataHoraAtual.format(formato);
+
+		return dataFormatada;
+	}
 }

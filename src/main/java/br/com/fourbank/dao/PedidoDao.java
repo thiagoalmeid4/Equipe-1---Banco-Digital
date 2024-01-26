@@ -24,6 +24,7 @@ public class PedidoDao {
 	}
 
 	public void addPedido(Pedido pedido) {
+		pedido.setId(pedidos.size());
 		pedidos.add(pedido);
 	}
 

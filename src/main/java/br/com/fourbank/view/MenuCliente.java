@@ -1,10 +1,10 @@
 package br.com.fourbank.view;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import br.com.fourbank.dao.BancoDeDados;
 import br.com.fourbank.dao.ProdutoDao;
 import br.com.fourbank.entity.Cliente;
 import br.com.fourbank.entity.Pedido;
@@ -21,16 +21,15 @@ public class MenuCliente {
 	private Produto produto;
 	private ProdutoDao dao;
 	private Cliente clienteLogado;
+	private final BancoDeDados bancoDeDados = new BancoDeDados();
 
 	Scanner input = new Scanner(System.in);
 
 	public MenuCliente() {
-		this.clienteService = new ClienteService();
-		this.pedidoService = new PedidoService();
-		this.produtoService = new ProdutoService();
+		this.clienteService = new ClienteService(bancoDeDados);
+		this.pedidoService = new PedidoService(bancoDeDados);
+		this.produtoService = new ProdutoService(bancoDeDados);
 		this.produto = new Produto();
-		this.dao = new ProdutoDao();
-		
 	}
 
 	private void menuPrincipal() {

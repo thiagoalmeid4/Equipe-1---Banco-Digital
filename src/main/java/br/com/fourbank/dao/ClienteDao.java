@@ -1,13 +1,17 @@
 package br.com.fourbank.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fourbank.entity.Cliente;
 
 public class ClienteDao {
 
-	ArrayList <Cliente> listadeclientes= new ArrayList<>();
+	private List<Cliente>listadeclientes;
+
+	public ClienteDao(List<Cliente> listadeclientes) {
+		this.listadeclientes = listadeclientes;
+	}
+
 	public void addCliente(Cliente cliente) {
 		listadeclientes.add(cliente);
 	}

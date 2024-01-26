@@ -3,12 +3,15 @@ package br.com.fourbank.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fourbank.entity.Cliente;
 import br.com.fourbank.entity.Pedido;
-import br.com.fourbank.entity.Produto;
 
 public class PedidoDao {
-	ArrayList<Pedido> pedidos = new ArrayList<>();
+
+	private List<Pedido> pedidos;
+
+	public PedidoDao (List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 	
 	public List<Pedido> pedidoPorCliente(String cpf){
 		List<Pedido> pedidosDoCliente = new ArrayList<Pedido>();

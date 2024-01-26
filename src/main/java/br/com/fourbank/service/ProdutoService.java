@@ -2,12 +2,17 @@ package br.com.fourbank.service;
 
 import java.util.List;
 
+import br.com.fourbank.dao.BancoDeDados;
 import br.com.fourbank.dao.ProdutoDao;
 import br.com.fourbank.entity.Produto;
 
 public class ProdutoService {
 
-	ProdutoDao produtoDao = new ProdutoDao();
+	private ProdutoDao produtoDao;
+
+	public ProdutoService(BancoDeDados bancoDeDados) {
+		produtoDao = new ProdutoDao(bancoDeDados.getProdutos());
+	}
 
 	public void cadastrar(Produto a) {
 		if (a.getCodigo().length() == 8) {

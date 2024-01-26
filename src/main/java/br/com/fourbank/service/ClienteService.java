@@ -2,12 +2,17 @@ package br.com.fourbank.service;
 
 import java.util.List;
 
+import br.com.fourbank.dao.BancoDeDados;
 import br.com.fourbank.dao.ClienteDao;
 import br.com.fourbank.entity.Cliente;
 
 public class ClienteService {
 
-	ClienteDao clienteDao = new ClienteDao();
+	private ClienteDao clienteDao;
+
+	public ClienteService(BancoDeDados bancoDeDados) {
+		clienteDao = new ClienteDao(bancoDeDados.getClientes());
+	}
 
 	public void addCliente(Cliente cliente) {
 		if (cliente.getCpf().length() == 11)

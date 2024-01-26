@@ -22,13 +22,13 @@ public class Pedido {
 	
 	public Pedido() {}
 	
-	public Pedido(Integer id, Double frete, Double valorTotal, String dataDoPedido, Boolean status) {
+	public Pedido(Cliente cliente, String dataDoPedido, List<Produto> lista) {
 		super();
-		this.id = id;
+		this.cliente = cliente;
 		
-		this.valorTotal = valorTotal;
+		this.produtos = lista;
 		this.dataDoPedido = dataDoPedido;
-		this.status = status;
+		
 	}
 	public int getId() {
 		return id;

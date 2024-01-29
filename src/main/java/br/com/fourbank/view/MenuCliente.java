@@ -178,7 +178,8 @@ public class MenuCliente {
 			produto.setQuantidade(input.nextInt());
 
 			produtoService.cadastrar(produto);
-
+			menuVendedor();
+			
 			break;
 
 		case 2:

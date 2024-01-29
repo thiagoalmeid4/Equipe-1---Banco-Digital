@@ -1,5 +1,6 @@
 package br.com.loja.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.loja.dao.BancoDeDados;
@@ -38,5 +39,20 @@ public class ProdutoService {
 		}
 		return null;
 	}
+
+
+	public List<Produto> listarProdutosPorVendedor(int id) {
+		List<Produto> produtos = new ArrayList<>();
+		for (Produto p : produtoDao.listar()) {
+			
+				if (p.getIdVendedor() == id) {
+					produtos.add(p);
+			}
+		}
+		return produtos;
+	}
+
+
+
 
 }

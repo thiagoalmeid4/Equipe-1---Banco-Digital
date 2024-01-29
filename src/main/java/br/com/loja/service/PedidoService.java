@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.loja.dao.BancoDeDados;
+import br.com.loja.dao.ClienteDao;
 import br.com.loja.dao.ProdutoDao;
+import br.com.loja.entity.Cliente;
 import br.com.loja.entity.Pedido;
 import br.com.loja.entity.Produto;
 import br.com.loja.entity.Venda;
@@ -14,9 +16,11 @@ public class PedidoService {
 
 	private PedidoDao pedidoDao;
 	private ProdutoDao produtoDao;
+	private ClienteDao clienteDao;
 
 	public PedidoService(BancoDeDados bancoDeDados) {
 		this.pedidoDao = new PedidoDao(bancoDeDados.getPedidos());
+		this.clienteDao = new ClienteDao(bancoDeDados.getClientes());
 		this.produtoDao = new ProdutoDao(bancoDeDados.getProdutos());
 	}
 
@@ -28,7 +32,7 @@ public class PedidoService {
 		return pedidoDao.listarPedidos();
 	}
 
-	public boolean realizarVenda(Pedido pedido) {
+	public void realizarVenda(Pedido pedido) {
 		double valorTotal = 0;
 		for (Produto produto : pedido.getProdutos()) {
 			valorTotal = valorTotal + produto.getPreco();
@@ -41,11 +45,11 @@ public class PedidoService {
 			pedidoDao.addPedido(pedido);
 			for (Produto p : pedido.getProdutos()) {
 				produtoDao.removerQtd(p);
+				addSaldoVendedor(p.getIdVendedor(), p.getPreco());
 			}
-			return true;
+		} else	{
+			throw new RuntimeException("Saldo insuficiente.");
 		}
-
-		return false;
 	}
 
 	public List<Venda> listarVendas(int id) {
@@ -58,5 +62,14 @@ public class PedidoService {
 			}
 		}
 		return minhasVendas;
+	}
+
+	private void addSaldoVendedor(int idCliente, double saldo) {
+		for (Cliente cliente : clienteDao.listarclientes()) {
+			if (cliente.getId() == idCliente) {
+				cliente.setSaldo(cliente.getSaldo() + saldo);
+			}
+		}
+
 	}
 }

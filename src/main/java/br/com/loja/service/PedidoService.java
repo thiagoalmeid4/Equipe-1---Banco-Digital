@@ -1,14 +1,14 @@
-package br.com.fourbank.service;
+package br.com.loja.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fourbank.dao.BancoDeDados;
-import br.com.fourbank.dao.PedidoDao;
-import br.com.fourbank.dao.ProdutoDao;
-import br.com.fourbank.entity.Pedido;
-import br.com.fourbank.entity.Produto;
-import br.com.fourbank.entity.Venda;
+import br.com.loja.dao.BancoDeDados;
+import br.com.loja.dao.ProdutoDao;
+import br.com.loja.entity.Pedido;
+import br.com.loja.entity.Produto;
+import br.com.loja.entity.Venda;
+import br.com.loja.dao.PedidoDao;
 
 public class PedidoService {
 

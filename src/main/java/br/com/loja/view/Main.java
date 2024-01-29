@@ -1,4 +1,4 @@
-package br.com.fourbank.view;
+package br.com.loja.view;
 
 public class Main {
 

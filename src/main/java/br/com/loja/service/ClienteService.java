@@ -1,10 +1,10 @@
-package br.com.fourbank.service;
+package br.com.loja.service;
 
 import java.util.List;
 
-import br.com.fourbank.dao.BancoDeDados;
-import br.com.fourbank.dao.ClienteDao;
-import br.com.fourbank.entity.Cliente;
+import br.com.loja.dao.BancoDeDados;
+import br.com.loja.entity.Cliente;
+import br.com.loja.dao.ClienteDao;
 
 public class ClienteService {
 

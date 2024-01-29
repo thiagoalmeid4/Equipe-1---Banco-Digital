@@ -1,10 +1,10 @@
-package br.com.fourbank.service;
+package br.com.loja.service;
 
 import java.util.List;
 
-import br.com.fourbank.dao.BancoDeDados;
-import br.com.fourbank.dao.ProdutoDao;
-import br.com.fourbank.entity.Produto;
+import br.com.loja.dao.BancoDeDados;
+import br.com.loja.entity.Produto;
+import br.com.loja.dao.ProdutoDao;
 
 public class ProdutoService {
 

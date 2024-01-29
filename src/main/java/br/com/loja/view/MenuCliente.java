@@ -1,4 +1,4 @@
-package br.com.fourbank.view;
+package br.com.loja.view;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.fourbank.dao.BancoDeDados;
-import br.com.fourbank.dao.ProdutoDao;
-import br.com.fourbank.entity.Cliente;
-import br.com.fourbank.entity.Pedido;
-import br.com.fourbank.entity.Produto;
-import br.com.fourbank.entity.Venda;
-import br.com.fourbank.service.ClienteService;
-import br.com.fourbank.service.PedidoService;
-import br.com.fourbank.service.ProdutoService;
+import br.com.loja.dao.BancoDeDados;
+import br.com.loja.entity.Cliente;
+import br.com.loja.entity.Pedido;
+import br.com.loja.entity.Produto;
+import br.com.loja.entity.Venda;
+import br.com.loja.service.ClienteService;
+import br.com.loja.service.PedidoService;
+import br.com.loja.service.ProdutoService;
+import br.com.loja.dao.ProdutoDao;
 
 public class MenuCliente {
 

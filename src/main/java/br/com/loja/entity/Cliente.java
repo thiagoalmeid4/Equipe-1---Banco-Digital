@@ -1,4 +1,4 @@
-package br.com.fourbank.entity;
+package br.com.loja.entity;
 
 public class Cliente {
 

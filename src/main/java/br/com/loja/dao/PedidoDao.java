@@ -1,9 +1,9 @@
-package br.com.fourbank.dao;
+package br.com.loja.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fourbank.entity.Pedido;
+import br.com.loja.entity.Pedido;
 
 public class PedidoDao {
 

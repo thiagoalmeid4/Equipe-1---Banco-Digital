@@ -1,8 +1,8 @@
-package br.com.fourbank.dao;
+package br.com.loja.dao;
 
 import java.util.List;
 
-import br.com.fourbank.entity.Cliente;
+import br.com.loja.entity.Cliente;
 
 public class ClienteDao {
 

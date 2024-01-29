@@ -31,6 +31,9 @@ public class Cliente {
 		return nome;
 	}
 	public void setNome(String nome) {
+		String n = nome;
+		nome = n.strip();
+		
 		if(nome ==null|| nome.isBlank()) {
 			throw new RuntimeException("Nome é obrigatório");
 		}

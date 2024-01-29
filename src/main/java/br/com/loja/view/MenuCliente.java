@@ -21,7 +21,7 @@ public class MenuCliente {
 	private ClienteService clienteService;
 	private PedidoService pedidoService;
 	private ProdutoService produtoService;
-	private Produto produto;
+	List<Produto> lista = new ArrayList<>();
 
 	private Cliente clienteLogado;
 	private final BancoDeDados bancoDeDados = new BancoDeDados();
@@ -32,7 +32,7 @@ public class MenuCliente {
 		this.clienteService = new ClienteService(bancoDeDados);
 		this.pedidoService = new PedidoService(bancoDeDados);
 		this.produtoService = new ProdutoService(bancoDeDados);
-		this.produto = new Produto();
+
 	}
 
 	private void menuPrincipal() {
@@ -56,6 +56,7 @@ public class MenuCliente {
 				System.out.println("Insira sua Data de nascimento:");
 				cliente.setDataDeNascimento(input.nextLine());
 				clienteService.addCliente(cliente);
+				menuPrincipal();
 			} catch (RuntimeException e) {
 				System.out.println(e.getMessage());
 				menuPrincipal();
@@ -123,7 +124,7 @@ public class MenuCliente {
 			case 4:
 				for (Pedido p : pedidoService.listarPedidosPorCliente(clienteLogado.getCpf())) {
 					System.out.println("\nId: " + p.getId() + "\nData: " + p.getDataDoPedido() + "\nValor total: "
-							+ p.getValorTotal() + "\nCódigo: ");
+							+ p.getValorTotal());
 					for (Produto pr : p.getProdutos()) {
 						System.out.println("\nProduto: " + pr.getNome() + "\nCódigo: " + pr.getCodigo() + "\nPreço: "
 								+ pr.getPreco());
@@ -156,6 +157,7 @@ public class MenuCliente {
 		case 1:
 			input = new Scanner(System.in);
 			System.out.println("Insira o nome do produto:");
+			var produto = new Produto();
 			produto.setNome(input.next());
 
 			System.out.println("Insira a marca do produto:");
@@ -179,7 +181,7 @@ public class MenuCliente {
 
 			produtoService.cadastrar(produto);
 			menuVendedor();
-			
+
 			break;
 
 		case 2:
@@ -202,7 +204,6 @@ public class MenuCliente {
 		boolean condicao = true;
 		int sensor;
 		Scanner input = new Scanner(System.in);
-		List<Produto> lista = new ArrayList<>();
 
 		for (Produto p : produtoService.listar()) {
 			System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
@@ -211,33 +212,46 @@ public class MenuCliente {
 		}
 
 		while (condicao) {
-			System.out.println("insira 1 se deseja adicionar um produto ou 0 para sair\n");
+			System.out.println(" 1-Adicionar produto no carrinho\n" + " 2-Listar seu carrinho\n"
+					+ " 3- Remover item do carrinho\n" + " 4-Comprar itens do carrinho\n 0- Sair\n");
 			sensor = input.nextInt();
+			String cod;
 
 			switch (sensor) {
 			case 1:
 
 				System.out.println("Informe o código do produto que produto deseja comprar");
-				String cod = input.next();
-				
-				produto = produtoService.produtoPorCodigo(cod);
-				lista.add(produto);
+				cod = input.next();
+
+				var produto = produtoService.produtoPorCodigo(cod);
+				adicionarCarrinho(produto);
 
 				break;
-			case 2: 
-				if (lista.size() > 0) {
-				
-					pedidoService.realizarVenda(new Pedido(clienteLogado, obterData(), lista));
-				
-			}
+			case 2:
+				listarCarrinho();
 				break;
+			case 3:
+				System.out.println("escreva o código do produto que deseja remover");
+				cod = input.next();
+				removerCarrinho(cod);
+
+				break;
+			case 4:
+				if (!lista.isEmpty()) {
+
+					pedidoService.realizarVenda(new Pedido(clienteLogado, obterData(), lista));
+
+				}else {
+					break;
+				}
+				
 			default:
 
 				condicao = false;
 				break;
 			}
 		}
-		
+
 	}
 
 	private String obterData() {
@@ -248,5 +262,25 @@ public class MenuCliente {
 		String dataFormatada = dataHoraAtual.format(formato);
 
 		return dataFormatada;
+	}
+
+	private void adicionarCarrinho(Produto p) {
+		lista.add(p);
+	}
+
+	private void listarCarrinho() {
+		for (Produto p : lista) {
+			System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
+					+ p.getCategoria() + "\nCódigo: " + p.getCodigo() + "\nPreço: " + p.getPreco() + "\n");
+		}
+	}
+
+	private void removerCarrinho(String codigo) {
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getCodigo().equals(codigo)) {
+				lista.remove(i);
+				break;
+			}
+		}
 	}
 }

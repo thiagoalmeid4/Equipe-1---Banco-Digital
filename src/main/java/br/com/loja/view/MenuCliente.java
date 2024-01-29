@@ -67,6 +67,10 @@ public class MenuCliente {
 			main();
 			break;
 
+		default:
+			menuPrincipal();
+			break;
+
 		}
 
 	}
@@ -95,177 +99,196 @@ public class MenuCliente {
 	}
 
 	private void main() {
-		Scanner input = new Scanner(System.in);
+		try {
+			Scanner input = new Scanner(System.in);
 
-		boolean flag = true;
-		System.out.println("Agora você está no seu menu:");
-		while (flag) {
-			System.out.println("Bem vindo\n" + "--------------------------------\n" + " 1-Mostrar saldo\n"
-					+ " 2-Depositar\n" + " 3-Acessar como vendedor\n" + " 4-Listar pedidos\n" + " 5-Comprar produtos\n"
-					+ " 6-Sair da conta");
-			int escolha = input.nextInt();
-			switch (escolha) {
-			case 1:
-				System.out.println("Nome: "+clienteLogado.getNome());
-				System.out.println("Saldo: " + clienteService.mostrarSaldo(clienteLogado.getId()));
-				break;
-			case 2:
-				System.out.println("Qual valor para o deposito:");
-				var deposito = input.nextDouble();
-				if (deposito > 0) {
-					clienteService.depositar(clienteLogado.getId(), deposito);
-					System.out.println("Valor de R$" + deposito + " foi adicionado com sucesso");
-				} else {
-					System.out.println("Valor inválido");
-				}
-				break;
-			case 3:
-				menuVendedor();
-				break;
-			case 4:
-				for (Pedido p : pedidoService.listarPedidosPorCliente(clienteLogado.getCpf())) {
-					System.out.println("\nId: " + p.getId() + "\nData: " + p.getDataDoPedido() + "\nValor total: "
-							+ p.getValorTotal());
-					for (Produto pr : p.getProdutos()) {
-						System.out.println("\nProduto: " + pr.getNome() + "\nCódigo: " + pr.getCodigo() + "\nPreço: "
-								+ pr.getPreco());
+			boolean flag = true;
+			System.out.println("Agora você está no seu menu:");
+			while (flag) {
+				System.out.println("Bem vindo\n" + "--------------------------------\n" + " 1-Mostrar saldo\n"
+						+ " 2-Depositar\n" + " 3-Acessar como vendedor\n" + " 4-Listar pedidos\n"
+						+ " 5-Comprar produtos\n" + " 6-Sair da conta");
+				int escolha = input.nextInt();
+				switch (escolha) {
+				case 1:
+					System.out.println("Nome: " + clienteLogado.getNome());
+					System.out.println("Saldo: " + clienteService.mostrarSaldo(clienteLogado.getId()));
+					break;
+				case 2:
+					System.out.println("Qual valor para o deposito:");
+					var deposito = input.nextDouble();
+					if (deposito > 0) {
+						clienteService.depositar(clienteLogado.getId(), deposito);
+						System.out.println("Valor de R$" + deposito + " foi adicionado com sucesso");
+					} else {
+						System.out.println("Valor inválido");
 					}
+					break;
+				case 3:
+					menuVendedor();
+					break;
+				case 4:
+					for (Pedido p : pedidoService.listarPedidosPorCliente(clienteLogado.getCpf())) {
+						System.out.println("\nId: " + p.getId() + "\nData: " + p.getDataDoPedido() + "\nValor total: "
+								+ p.getValorTotal());
+						for (Produto pr : p.getProdutos()) {
+							System.out.println("\nProduto: " + pr.getNome() + "\nCódigo: " + pr.getCodigo()
+									+ "\nPreço: " + pr.getPreco());
+						}
+					}
+
+					break;
+
+				case 5:
+
+					comprarProduto();
+
+					break;
+				case 6:
+					menuPrincipal();
+					break;
 				}
-
-				break;
-
-			case 5:
-
-				comprarProduto();
-
-				break;
-			case 6:
-				menuPrincipal();
-				break;
 			}
-		}
 
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+			main();
+		}
 	}
 
 	private void menuVendedor() {
-		Scanner input = new Scanner(System.in);
+		try {
+			Scanner input = new Scanner(System.in);
 
-		int numero;
-		System.out.println(
-				" 1-Cadastre seu produto\n" + " 2-listar vendas\n" + " 3-listar produtos cadastrados\n" + " 4-sair");
-		numero = input.nextInt();
+			int numero;
+			System.out.println(" 1-Cadastre seu produto\n" + " 2-listar vendas\n" + " 3-listar produtos cadastrados\n"
+					+ " 4-sair");
+			numero = input.nextInt();
 
-		switch (numero) {
-		case 1:
-			input = new Scanner(System.in);
-			System.out.println("Insira o nome do produto:");
-			var produto = new Produto();
-			produto.setNome(input.next());
+			switch (numero) {
+			case 1:
+				input = new Scanner(System.in);
+				System.out.println("Insira o nome do produto:");
+				var produto = new Produto();
+				produto.setNome(input.next());
 
-			System.out.println("Insira a marca do produto:");
-			produto.setMarca(input.next());
+				System.out.println("Insira a marca do produto:");
+				produto.setMarca(input.next());
 
-			System.out.println("Insira a descricao do produto:");
-			produto.setDescricao(input.next());
+				System.out.println("Insira a descricao do produto:");
+				produto.setDescricao(input.next());
 
-			input = new Scanner(System.in);
-			System.out.println("Insira o codigo do produto:");
-			produto.setCodigo(input.next());
+				input = new Scanner(System.in);
+				System.out.println("Insira o codigo do produto:");
+				produto.setCodigo(input.next());
 
-			System.out.println("Insira o preço do produto:");
-			produto.setPreco(input.nextDouble());
+				System.out.println("Insira o preço do produto:");
+				produto.setPreco(input.nextDouble());
 
-			System.out.println("Insira a categoria do produto:");
-			produto.setCategoria(input.next());
+				System.out.println("Insira a categoria do produto:");
+				produto.setCategoria(input.next());
 
-			System.out.println("Insira a quantidade do produto:");
-			produto.setQuantidade(input.nextInt());
+				System.out.println("Insira a quantidade do produto:");
+				produto.setQuantidade(input.nextInt());
 
-			produtoService.cadastrar(produto);
-			menuVendedor();
+				produtoService.cadastrar(produto);
+				menuVendedor();
 
-			break;
+				break;
 
-		case 2:
-			for (Venda v : pedidoService.listarVendas(clienteLogado.getId())) {
-				System.out.println("\nId: " + v.getIdPedido() + "\nCódigo: " + v.getCodigoProduto() + "\nProduto: "
-						+ v.getNomeProduto() + "\nPreço: " + v.getPreco());
+			case 2:
+				for (Venda v : pedidoService.listarVendas(clienteLogado.getId())) {
+					System.out.println("\nId: " + v.getIdPedido() + "\nCódigo: " + v.getCodigoProduto() + "\nProduto: "
+							+ v.getNomeProduto() + "\nPreço: " + v.getPreco());
+				}
+				break;
+			case 4:
+				main();
+				break;
+			case 3:
+				for (Produto p : produtoService.listarProdutosPorVendedor(clienteLogado.getId())) {
+					System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
+							+ p.getCategoria() + "\nCódigo: " + p.getCodigo() + "\nPreço: " + p.getPreco()
+							+ "\nQuantidade em estoque: " + p.getQuantidade() + "\n");
+				}
+				menuVendedor();
+				break;
+			default:
+				menuVendedor();
+				break;
 			}
-			break;
-		case 4:
-			main();
-			break;
-		case 3:
-			for (Produto p : produtoService.listarProdutosPorVendedor(clienteLogado.getId())) {
+
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+			menuVendedor();
+		}
+	}
+
+	private void comprarProduto() {
+		try {
+			boolean condicao = true;
+			int sensor;
+			Scanner input = new Scanner(System.in);
+
+			for (Produto p : produtoService.listar()) {
 				System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
 						+ p.getCategoria() + "\nCódigo: " + p.getCodigo() + "\nPreço: " + p.getPreco()
 						+ "\nQuantidade em estoque: " + p.getQuantidade() + "\n");
 			}
-			menuVendedor();
-			break;
-		default:
-			menuVendedor();
-			break;
-		}
 
-	}
+			while (condicao) {
+				System.out.println(" 1-Adicionar produto no carrinho\n" + " 2-Listar seu carrinho\n"
+						+ " 3- Remover item do carrinho\n" + " 4-Comprar itens do carrinho\n 0- Sair\n");
+				sensor = input.nextInt();
+				String cod;
 
-	private void comprarProduto() {
-		boolean condicao = true;
-		int sensor;
-		Scanner input = new Scanner(System.in);
+				switch (sensor) {
+				case 1:
 
-		for (Produto p : produtoService.listar()) {
-			System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
-					+ p.getCategoria() + "\nCódigo: " + p.getCodigo() + "\nPreço: " + p.getPreco()
-					+ "\nQuantidade em estoque: " + p.getQuantidade() + "\n");
-		}
+					System.out.println("Informe o código do produto que produto deseja comprar");
+					cod = input.next();
 
-		while (condicao) {
-			System.out.println(" 1-Adicionar produto no carrinho\n" + " 2-Listar seu carrinho\n"
-					+ " 3- Remover item do carrinho\n" + " 4-Comprar itens do carrinho\n 0- Sair\n");
-			sensor = input.nextInt();
-			String cod;
+					var produto = produtoService.produtoPorCodigo(cod);
+					if (produto != null) {
+						adicionarCarrinho(produto);
+						System.out.println("produto adicionado ao carrinho");
+					} else {
+						System.out.println("Codigo invalido");
+					}
 
-			switch (sensor) {
-			case 1:
+					break;
+				case 2:
+					listarCarrinho();
+					break;
+				case 3:
+					System.out.println("escreva o código do produto que deseja remover");
+					cod = input.next();
+					removerCarrinho(cod);
+					System.out.println("produto removido do carrinho");
 
-				System.out.println("Informe o código do produto que produto deseja comprar");
-				cod = input.next();
+					break;
+				case 4:
+					if (!lista.isEmpty()) {
 
-				var produto = produtoService.produtoPorCodigo(cod);
-				adicionarCarrinho(produto);
-				System.out.println("produto adicionado ao carrinho");
-				
-				break;
-			case 2:
-				listarCarrinho();
-				break;
-			case 3:
-				System.out.println("escreva o código do produto que deseja remover");
-				cod = input.next();
-				removerCarrinho(cod);
-				System.out.println("produto removido do carrinho");
-				
-				break;
-			case 4:
-				if (!lista.isEmpty()) {
+						pedidoService.realizarVenda(new Pedido(clienteLogado, obterData(), lista));
+						System.out.println("compra realizada");
 
-					pedidoService.realizarVenda(new Pedido(clienteLogado, obterData(), lista));
-					System.out.println("compra realizada");
-					
-				} else {
-					System.out.println("seu carrinho está vazio");
+					} else {
+						System.out.println("seu carrinho está vazio");
+						break;
+					}
+
+				default:
+
+					condicao = false;
 					break;
 				}
-
-			default:
-
-				condicao = false;
-				break;
 			}
-		}
 
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+			comprarProduto();
+		}
 	}
 
 	private String obterData() {

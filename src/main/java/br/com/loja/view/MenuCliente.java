@@ -106,6 +106,7 @@ public class MenuCliente {
 			int escolha = input.nextInt();
 			switch (escolha) {
 			case 1:
+				System.out.println("Nome: "+clienteLogado.getNome());
 				System.out.println("Saldo: " + clienteService.mostrarSaldo(clienteLogado.getId()));
 				break;
 			case 2:
@@ -150,7 +151,8 @@ public class MenuCliente {
 		Scanner input = new Scanner(System.in);
 
 		int numero;
-		System.out.println(" 1-Cadastre seu produto\n" + " 2-listar vendas\n" + " 3-sair");
+		System.out.println(
+				" 1-Cadastre seu produto\n" + " 2-listar vendas\n" + " 3-listar produtos cadastrados\n" + " 4-sair");
 		numero = input.nextInt();
 
 		switch (numero) {
@@ -190,8 +192,16 @@ public class MenuCliente {
 						+ v.getNomeProduto() + "\nPreço: " + v.getPreco());
 			}
 			break;
-		case 3:
+		case 4:
 			main();
+			break;
+		case 3:
+			for (Produto p : produtoService.listarProdutosPorVendedor(clienteLogado.getId())) {
+				System.out.println("\nProduto: " + p.getNome() + "\nMarca: " + p.getMarca() + "\nCategoria: "
+						+ p.getCategoria() + "\nCódigo: " + p.getCodigo() + "\nPreço: " + p.getPreco()
+						+ "\nQuantidade em estoque: " + p.getQuantidade() + "\n");
+			}
+			menuVendedor();
 			break;
 		default:
 			menuVendedor();
@@ -225,7 +235,8 @@ public class MenuCliente {
 
 				var produto = produtoService.produtoPorCodigo(cod);
 				adicionarCarrinho(produto);
-
+				System.out.println("produto adicionado ao carrinho");
+				
 				break;
 			case 2:
 				listarCarrinho();
@@ -234,17 +245,20 @@ public class MenuCliente {
 				System.out.println("escreva o código do produto que deseja remover");
 				cod = input.next();
 				removerCarrinho(cod);
-
+				System.out.println("produto removido do carrinho");
+				
 				break;
 			case 4:
 				if (!lista.isEmpty()) {
 
 					pedidoService.realizarVenda(new Pedido(clienteLogado, obterData(), lista));
-
-				}else {
+					System.out.println("compra realizada");
+					
+				} else {
+					System.out.println("seu carrinho está vazio");
 					break;
 				}
-				
+
 			default:
 
 				condicao = false;

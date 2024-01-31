@@ -39,7 +39,13 @@ public class ProdutoService {
 		}
 		return null;
 	}
-
+	public void produtoCodigo(String codigo) {
+		for (Produto p : produtoDao.listar()) {
+			if (p.getCodigo().equals(codigo)) {
+				throw new RuntimeException("esse código está sendo usado");
+			}
+		}
+	}	
 
 	public List<Produto> listarProdutosPorVendedor(int id) {
 		List<Produto> produtos = new ArrayList<>();

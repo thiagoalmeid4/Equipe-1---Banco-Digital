@@ -25,8 +25,7 @@ public class Inputs {
                 service.cpfExiste(cpf);
                 
                 cliente.setCpf(cpf);
-                
-                
+
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());
             }
@@ -51,7 +50,7 @@ public class Inputs {
         
         cadastrarCliente(cliente, service);
     }
-public static void cadastrarProduto(Produto produto) {
+public static void cadastrarProduto(Produto produto, ProdutoService service) {
         
 		Scanner scanner = new Scanner(System.in);
         if (produto.getNome() == null) {
@@ -76,7 +75,9 @@ public static void cadastrarProduto(Produto produto) {
         } else if (produto.getCodigo() == null) {
             try {
                 System.out.println("Insira o código do produto:");
-                produto.setCodigo(scanner.nextLine());
+                String codigo = scanner.nextLine();
+                service.produtoCodigo(codigo);
+                produto.setCodigo(codigo);
             }catch (RuntimeException e){
                 System.out.println(e.getMessage());
             }
@@ -109,7 +110,7 @@ public static void cadastrarProduto(Produto produto) {
             return;
         }
         
-        cadastrarProduto(produto);
+        cadastrarProduto(produto,service);
     }
 	
 }

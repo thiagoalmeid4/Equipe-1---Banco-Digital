@@ -40,7 +40,6 @@ public class Cliente {
 		else
 			throw new RuntimeException("Nome é obrigatório");
 	}
-	
 	public double getSaldo() {
 		return saldo;
 	}

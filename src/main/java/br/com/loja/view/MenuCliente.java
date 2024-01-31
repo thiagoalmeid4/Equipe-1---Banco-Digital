@@ -164,7 +164,7 @@ public class MenuCliente {
 
 			switch (numero) {
 			case 1:
-				Inputs.cadastrarProduto(produto);
+				Inputs.cadastrarProduto(produto,produtoService);
 				produtoService.cadastrar(produto);
 				produto = new Produto();
 				menuVendedor();

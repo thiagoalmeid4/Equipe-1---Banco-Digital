@@ -11,7 +11,10 @@ public class Produto {
 	private String marca;//
 	private int idVendedor;
 	
-	public Produto() {}
+	public Produto() {
+		this.preco = 0;
+		this.quantidade = 0;
+	}
 	
 	public Produto(String nome, double preco, String codigo, String descricao, int quantidade, String categoria,
 			String marca) {

@@ -33,13 +33,14 @@ public class Cliente {
 	public void setNome(String nome) {
 		String n = nome;
 		nome = n.strip();
-		
-		if(nome ==null|| nome.isBlank()) {
-			throw new RuntimeException("Nome é obrigatório");
+		String regex = "^[a-zA-Z]+$";
+		if(nome != null && nome.matches(regex)) {
+			this.nome = nome;
 		}
 		else
-		this.nome = nome;
+			throw new RuntimeException("Nome é obrigatório");
 	}
+	
 	public double getSaldo() {
 		return saldo;
 	}

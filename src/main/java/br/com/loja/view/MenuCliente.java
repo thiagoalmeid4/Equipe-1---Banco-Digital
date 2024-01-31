@@ -22,6 +22,8 @@ public class MenuCliente {
 	private PedidoService pedidoService;
 	private ProdutoService produtoService;
 	List<Produto> lista = new ArrayList<>();
+	private Cliente cliente = new Cliente();
+	private Produto produto = new Produto();
 
 	private Cliente clienteLogado;
 	private final BancoDeDados bancoDeDados = new BancoDeDados();
@@ -37,7 +39,7 @@ public class MenuCliente {
 
 	private void menuPrincipal() {
 		Scanner input = new Scanner(System.in);
-		var cliente = new Cliente();
+		
 
 		System.out.println("Bem vindo a nossa loja:");
 
@@ -46,16 +48,9 @@ public class MenuCliente {
 		switch (escolha) {
 		case 1:
 			try {
-				System.out.println("Insira seu nome:");
-				input = new Scanner(System.in);
-				cliente.setNome(input.nextLine());
-				System.out.println("Insira seu CPF");
-				cliente.setCpf(input.nextLine());
-				System.out.println("Insira sua senha:");
-				cliente.setSenha(input.nextLine());
-				System.out.println("Insira sua Data de nascimento:");
-				cliente.setDataDeNascimento(input.nextLine());
+				Inputs.cadastrarCliente(cliente, clienteService);
 				clienteService.addCliente(cliente);
+				cliente = new Cliente();
 				menuPrincipal();
 			} catch (RuntimeException e) {
 				System.out.println(e.getMessage());
@@ -74,6 +69,8 @@ public class MenuCliente {
 		}
 
 	}
+	
+	
 
 	private void login() {
 		try {
@@ -167,33 +164,11 @@ public class MenuCliente {
 
 			switch (numero) {
 			case 1:
-				input = new Scanner(System.in);
-				System.out.println("Insira o nome do produto:");
-				var produto = new Produto();
-				produto.setNome(input.next());
-
-				System.out.println("Insira a marca do produto:");
-				produto.setMarca(input.next());
-
-				System.out.println("Insira a descricao do produto:");
-				produto.setDescricao(input.next());
-
-				input = new Scanner(System.in);
-				System.out.println("Insira o codigo do produto:");
-				produto.setCodigo(input.next());
-
-				System.out.println("Insira o preço do produto:");
-				produto.setPreco(input.nextDouble());
-
-				System.out.println("Insira a categoria do produto:");
-				produto.setCategoria(input.next());
-
-				System.out.println("Insira a quantidade do produto:");
-				produto.setQuantidade(input.nextInt());
-
+				Inputs.cadastrarProduto(produto);
 				produtoService.cadastrar(produto);
+				produto = new Produto();
 				menuVendedor();
-
+				
 				break;
 
 			case 2:

@@ -54,4 +54,11 @@ public class ClienteService {
 	public void depositar(int id, double valor) {
 		clienteDao.depositar(id, valor);
 	}
+	
+	public void cpfExiste(String cpf) {
+		var cliente = clienteDao.getCpfCliente(cpf);
+		if(cliente != null) {
+			throw new RuntimeException("Esse Cpf já está cadastrado");
+		}
+	}
 }
